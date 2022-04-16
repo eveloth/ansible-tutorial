@@ -65,6 +65,30 @@
       state: latest
     when: ansible_distribution == "CentOS"
 
+  - name: start httpd (CentOS)
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: change e-mail adress for admin
+    tags: apache,centos,httpd
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin test@eveloth.net
+    when: ansible_distribution == "CentOS"
+    register: httpd
+
+  - name: restart httpd (CentsOS)
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: restarted
+    when: httpd.changed
+
   - name: copy default html file for site
     tags: apache,apache2,httpd
     copy:
