@@ -28,6 +28,7 @@
     tags: always
     user:
       name: simone
+      shell: /bin/bash
       groups: root
 
   - name: add SSH key for simone
