@@ -13,7 +13,7 @@
     changed_when: false
     when: ansible_distribution == "Ubuntu"
 
-  - name: update cache (CentOS)
+  - name: update repository index (Ubuntu)
     tags: always
     dnf:
       update_cache: yes
